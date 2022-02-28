@@ -2,27 +2,47 @@
 
 namespace App\Entity;
 
+
 use App\Repository\BlogRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
-#[ORM\Entity(repositoryClass: BlogRepository::class)]
+/**
+ * @[ORM\Entity(repositoryClass: "App\Repository\BlogRepository)
+ */
 class Blog
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
+    /**
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type= "integer")
+    */
     private $id;
 
-    #[ORM\Column(type: 'string', length: 40)]
+    /**
+     * @ORM\Column(type="string", length=40)
+     * @Assert\NotBlank(message="Title cannot be empty.")
+     * @Assert\Length(max=40)
+     */
     private $title;
 
-    #[ORM\Column(type: 'string', length: 40)]
+    /**
+     * @ORM\Column(type="string", length=40)
+     * @Assert\NotBlank()
+     * @Assert\Length(max=40)
+     */
     private $short_description;
 
-    #[ORM\Column(type: 'text')]
+    /**
+     * @ORM\Column(type= "text")
+     * @Assert\NotBlank()
+     */
     private $body;
 
-    #[ORM\Column(type: 'string', length: 100, nullable: true)]
+    /**
+     * ORM\Column(type: "string", length: 100, nullable: true)
+     * @Assert\Image()
+     */ 
     private $image;
 
     public function getId(): ?int

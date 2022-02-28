@@ -19,6 +19,8 @@ class BlogFormType extends AbstractType
         $builder->add('imageFile', FileType::class, [
             'attr'     => ['class' => 'form-control',],
             'mapped' => false,
+            'required' => false
+
         ]);
     }
 
